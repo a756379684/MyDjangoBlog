@@ -1,0 +1,46 @@
+
+        <div class="card-body">
+            <h3 class="card-title">
+                <div class="spinner-grow" role="status">
+                </div>
+                近期动态
+            </h3>
+                {% for i in dynamic%}
+                <h6 class="card-subtitle mb-2 text-muted">{{ i.date }}</h6>
+                <h6 class="card-text">{{ i.text }}</h6>
+                {% endfor %}
+        </div>
+        <hr>
+      <div class="card-body">
+        <h4 class="card-subtitle mb-2 text-muted">一枚大二狗的博客</h4>
+          <h5 class="card-text">
+              <span class="badge badge-success badge-pill">程序猿</span>
+              <span class="badge badge-dark badge-pill">CTFer</span>
+              <span class="badge badge-secondary badge-pill">Python</span>
+              <span class="badge badge-primary badge-pill">Java</span>
+              <span class="badge badge-danger  badge-pill">C#</span>
+              <span class="badge badge-warning badge-pill">Php</span>
+              <span class="badge badge-info badge-pill">努力学习ing！！！</span>
+          </h5>
+      </div>
+        <hr>
+        <div class="card-body">
+            <h3 class="card-title">标签云</h3>
+            <h5 class="card-text">
+            {% for tag,v in tags.items %}
+                <a class="text-dark" href="{% url 'articles:filter_by_tag' tag.name %}" style="font-size:{{ v |add:10}}pt;"> {{ tag.name }} </a>
+            {% endfor %}
+          </h5>
+        </div>
+        <hr>
+        <div class="card-body">
+            <h3 class="card-title">链接推送</h3>
+            <h5 class="card-text">
+                <a class="text-dark h6" href="https://note.redmango.top/">HhhM的笔记库</a>
+                <br>
+                <a class="text-dark h6" href="https://docs.djangoproject.com/zh-hans/3.0/">Django</a>
+                <br>
+                <a class="text-dark h6" href="https://v4.bootcss.com/">Bootstrap4</a>
+
+          </h5>
+        </div>

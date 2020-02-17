@@ -1,0 +1,56 @@
+{% extends 'articles/base.html' %}
+{% load staticfiles %}
+{% block title %}{{ article.title }}{% endblock title %}
+{% block content %}
+{% block css %}
+<style>
+    ul{
+       list-style: none;
+    }
+    img:hover{
+      transform: scale(1.05);
+    }
+</style>
+<script>
+$(document).ready(function(){
+    $("div.toc").children("ul").children("li").find("a").addClass("h5 text-dark ");
+    $("div.toc").children("ul").addClass("list-unstyled mt-2");
+});
+</script>
+<link rel="stylesheet" href="{% static 'atelier-sulphurpool-light.css' %}">
+<script src="{% static 'highlight.pack.js' %}"></script>
+{% endblock css%}
+<body class="bg-white">
+{% include 'articles/header.html' %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 col-xl-8 col-sm-12 border border-top-0 border-bottom-0">
+            <h1>{{ article }}</h1>
+            <h6>
+                {{ article.create | date:"Y-m-d H:m:s" }}
+            </h6>
+            <h6>                {% for tag in article.tags.all %}
+                    {% if forloop.last %}
+                        {{ tag }}
+                    {% else %}
+                        {{ tag }} -
+                    {% endif %}
+                {% endfor %}
+            </h6>
+            <hr>
+            {{ article.text | safe}}
+        </div>
+        <div class="col-lg-4 col-xl-4 mt-3 d-none d-sm-none d-md-none d-lg-block d-xl-block">
+           <div class="card-body">
+            {{ toc|safe }}
+           </div>
+            <hr>
+            {% include 'articles/side.html' %}
+        </div>
+    </div>
+    {% include 'articles/footer.html' %}
+</div>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+{% endblock content %}

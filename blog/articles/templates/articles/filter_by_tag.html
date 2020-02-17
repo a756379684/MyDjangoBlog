@@ -1,0 +1,58 @@
+{% extends 'articles/base.html' %}
+{% load staticfiles %}
+{% block title %}{{ tag_name }} {% endblock title %}
+{% block content %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+<link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+{% endblock css%}
+<body>
+{% include 'articles/header.html' %}
+  <div class="container mt-5">
+   <div class="container-fluid">
+       <div class="row">
+    <div class="col-lg-8 col-xl-8 col-sm-12">
+
+    {% if articles %}
+        {% for article in articles %}
+            {% if forloop.first %}
+            {% else %}
+                <hr>
+            {% endif %}
+
+        <div class="card rounded-lg mt-4 border-0">
+          <div class="card-body">
+              <h2><a class="card-title text-dark" href="{% url 'articles:article_detail' article.id %}">{{ article.title }}</a></h2>
+            <h6 class="card-subtitle mb-2 text-muted">
+                <i class="fa fa-clock-o" aria-hidden="true"></i>{{ article.create | date:"Y-m-d H:m:s"}}
+                <i class="fa fa-eye" aria-hidden="true"></i>{{ article.views }}
+            </h6>
+              <h6>
+                {% for tag in article.tags.all %}
+                    {% if forloop.last %}
+                        {{ tag }}
+                    {% else %}
+                        {{ tag }} -
+                    {% endif %}
+                {% endfor %}</h6>
+            <p class="card-text d-none d-sm-none d-md-none d-lg-block d-xl-block">{{ article.text | truncatechars_html:200|safe }}</p>
+              <p class="card-text d-block d-sm-block d-md-block d-lg-none d-xl-none">{{ article.text | truncatechars_html:60|safe }}</p>
+              <a href="{% url 'articles:article_detail' article.id %}" class="h6 text-info">阅读全文>></a>
+          </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+    </div>
+    <div class="col-lg-4 col-xl-4 mt-3 d-none d-sm-none d-md-none d-lg-block d-xl-block">
+        <div class=container-fluid"">
+        {% include 'articles/side.html' %}
+        </div>
+    </div>
+    </div>
+   </div>
+      {% include 'articles/page.html' %}
+      {% include 'articles/footer.html' %}
+  </div>
+</body>
+
+{% endblock content %}

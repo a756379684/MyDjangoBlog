@@ -1,0 +1,35 @@
+{% extends 'articles/base.html' %}
+{% load staticfiles %}
+{% block title %}归档 {% endblock title %}
+{% block content %}
+{% block css %}
+<link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+<link rel="stylesheet" href="{% static 'timeline/style.css' %}">
+{% endblock css%}
+<body>
+{% include 'articles/header.html' %}
+  <div class="container mt-5">
+   <div class="container-fluid">
+       <div class="row">
+    <div class="col-lg-8 col-xl-8 col-sm-12">
+
+    {% for k,v in articles.items %}
+        <div class="timeline-item" date-is='{{ k.year }}.{{ k.month }}'>
+                {% for article in v %}
+                </p><a href="{% url 'articles:article_detail' article.id %}" class="text-dark">{{ article }}</a></p>
+                {% endfor %}
+        </div>
+    {% endfor %}
+    </div>
+    <div class="col-lg-4 col-xl-4 mt-3 d-none d-sm-none d-md-none d-lg-block d-xl-block">
+        <div class=container-fluid"">
+        {% include 'articles/side.html' %}
+        </div>
+    </div>
+    </div>
+   </div>
+      {% include 'articles/footer.html' %}
+  </div>
+</body>
+
+{% endblock content %}
