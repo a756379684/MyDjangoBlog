@@ -10,7 +10,7 @@
 
 ## 使用
 
-clone完项目后在项目目录下使用`pip install -r requirements.txt`，之后在python3环境下依次运行命令：
+clone完项目后在项目目录下使用`pip install -r requirements.txt`，之后在需要先建立好数据库并修改settings.py内对应的数据库配置，python3环境下依次运行命令：
 
 `python manage.py makemigrations`
 
